@@ -1,0 +1,30 @@
+name: CI Init
+
+on:
+  workflow_call:
+    inputs:
+      base_version:
+        required: true
+        type: string
+    outputs:
+      full_tag:
+        value: ${{ jobs.init.outputs.full_tag }}
+jobs:
+  init:
+    runs-on: ubuntu-latest
+
+    outputs:
+      full_tag: ${{ steps.ci-init.outputs.full_tag }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - id: ci-init
+        run: |
+          BASE_VERSION="${{ inputs.base_version }}"
+          BUILD_NUM="$GITHUB_RUN_NUMBER"
+          SHA_NUM="${GITHUB_SHA:0:7}"
+
+          FULL_TAG="$BASE_VERSION-$BUILD_NUM-$SHA_NUM"
+          echo "Generated FULL TAG:$FULL_TAG"
+          echo "full_tag=$FULL_TAG" >> $GITHUB_OUTPUT
+    

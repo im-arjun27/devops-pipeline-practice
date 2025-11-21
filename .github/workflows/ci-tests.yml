@@ -1,0 +1,46 @@
+name: CI Tests
+
+on:
+  workflow_call:
+    inputs:
+      full_tag:
+        required: true
+        type: string
+    outputs:
+      test_passed:
+        value: ${{ jobs.tests.outputs.test_passed }}
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    outputs:
+      test_passed: ${{ steps.result.outputs.test_passed }}
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+         distribution: temurin
+         java-version: "25"
+      - name: Caching Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-cache-${{ runner.os }}
+          restore-keys: maven-cache-
+      - name: run test
+        run: ./mvnw test
+        continue-on-error: true
+      - name: Result
+        id: result
+        run: |
+          result=$?
+          if [ $result -eq 0 ]; then
+            echo "test_passed=true" >> $GITHUB_OUTPUT
+          else
+            echo "test_passed=false" >> $GITHUB_OUTPUT
+          fi
+         
+        
+          
