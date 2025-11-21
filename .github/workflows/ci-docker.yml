@@ -33,4 +33,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: docker.io/devops-practice/spring-boot-api:${{ inputs.full_tag }}
+          tags: docker.io/arjun2701/spring-boot-api:${{ inputs.full_tag }}
