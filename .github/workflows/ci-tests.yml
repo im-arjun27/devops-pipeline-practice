@@ -18,6 +18,9 @@ jobs:
       test_passed: ${{ steps.result.outputs.test_passed }}
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -36,7 +39,7 @@ jobs:
           restore-keys: maven-cache-
 
       - name: run test
-        run: mvn test
+        run: ./mvnw test
         continue-on-error: true
       - name: Result
         id: result
