@@ -12,13 +12,13 @@ on:
 
 jobs:
   docker_build:
-    if: ${{ inputs.test_passed == "true" }}
+    if: ${{ inputs.test_passed == 'true' }}
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout Repo
         uses: actions/checkoout@v4
-        
+
       - name: Setup Docker BuildX
         uses: docker/setup-buildx-action@v3
 
