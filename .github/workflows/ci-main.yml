@@ -19,7 +19,7 @@ jobs:
 
   ci-docker:
     needs: ci-tests
-    if: ${{ needs.ci-tests.outputs.test_passed == "true" }}
+    if: ${{ needs.ci-tests.outputs.test_passed == 'true' }}
     uses: ./.github/workflows/ci-docker.yml
     with:
       full_tag: ${{ needs.ci-init.outputs.full_tag }}
