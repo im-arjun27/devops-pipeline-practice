@@ -21,6 +21,7 @@ jobs:
     needs: ci-tests
     if: ${{ needs.ci-tests.outputs.test_passed == 'true' }}
     uses: ./.github/workflows/ci-docker.yml
+    secrets: inherit
     with:
       full_tag: ${{ needs.ci-init.outputs.full_tag }}
       test_passed: ${{ needs.ci-tests.outputs.test_passed }}
