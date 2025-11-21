@@ -21,9 +21,13 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-         distribution: temurin
-         java-version: "25"
-     
+          distribution: temurin
+          java-version: "25"
+
+      - name: Debug full_tag value
+        run: |
+          echo "FULL TAG RECEIVED: '${{ inputs.full_tag }}'"
+
       - name: Caching Maven
         uses: actions/cache@v4
         with:
@@ -33,7 +37,7 @@ jobs:
 
       - name: Permission to execute ./mnvw
         run: chmod +x ./mvnw test
-     
+
       - name: run test
         run: ./mvnw test
         continue-on-error: true
@@ -46,6 +50,3 @@ jobs:
           else
             echo "test_passed=false" >> $GITHUB_OUTPUT
           fi
-         
-        
-          
