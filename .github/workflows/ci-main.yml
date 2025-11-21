@@ -1,0 +1,26 @@
+name: MAIN PIPELINE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci-init:
+    uses: ./.github/workflows/ci-init.yml
+    with:
+      base_version: "v1.0.0"
+
+  ci-tests:
+    needs: ci-init
+    uses: ./.github/workflows/ci-tests.yml
+    with:
+      full_tag: ${{ needs.ci-init.outputs.full_tag }}
+
+  ci-docker:
+    needs: ci-tests
+    if: ${{ needs.ci-tests.outputs.test_passed == "true" }}
+    uses: ./.github/workflows/ci-docker.yml
+    with:
+      full_tag: ${{ needs.ci-init.outputs.full_tag }}
+      test_passed: ${{ needs.ci-tests.outputs.test_passed }}
