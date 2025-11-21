@@ -35,11 +35,8 @@ jobs:
           key: maven-cache-${{ runner.os }}
           restore-keys: maven-cache-
 
-      - name: Permission to execute ./mnvw
-        run: chmod +x ./mvnw test
-
       - name: run test
-        run: ./mvnw test
+        run: mvn test
         continue-on-error: true
       - name: Result
         id: result
