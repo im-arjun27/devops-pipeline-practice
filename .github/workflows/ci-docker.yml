@@ -33,6 +33,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Debug full_tag value
+        run: |
+          echo "FULL TAG RECEIVED: '${{ inputs.full_tag }}'"
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
