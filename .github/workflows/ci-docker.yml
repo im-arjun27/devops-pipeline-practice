@@ -14,8 +14,12 @@ jobs:
   docker_build:
     if: ${{ inputs.test_passed == 'true' }}
     runs-on: ubuntu-latest
-    
+
     steps:
+      - name: Debug full_tag value
+        run: |
+          echo "FULL TAG RECEIVED: '${{ inputs.full_tag }}'"
+
       - name: Checkout Repo
         uses: actions/checkout@v4
 
