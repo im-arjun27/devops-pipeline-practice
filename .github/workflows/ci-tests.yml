@@ -23,12 +23,17 @@ jobs:
         with:
          distribution: temurin
          java-version: "25"
+     
       - name: Caching Maven
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: maven-cache-${{ runner.os }}
           restore-keys: maven-cache-
+
+      - name: Permission to execute ./mnvw
+        run: chmod +x ./mvnw test
+     
       - name: run test
         run: ./mvnw test
         continue-on-error: true
