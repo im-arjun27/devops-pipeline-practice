@@ -27,10 +27,6 @@ jobs:
           distribution: temurin
           java-version: "25"
 
-      - name: Debug full_tag value
-        run: |
-          echo "FULL TAG RECEIVED: '${{ inputs.full_tag }}'"
-
       - name: Caching Maven
         uses: actions/cache@v4
         with:

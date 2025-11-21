@@ -20,6 +20,10 @@ jobs:
         run: |
           echo "FULL TAG RECEIVED: '${{ inputs.full_tag }}'"
 
+      - name: Debug full_tag value
+        run: |
+          echo "TEST RESULT RECEIVED: '${{ inputs.test_passed }}'"
+
       - name: Checkout Repo
         uses: actions/checkout@v4
 
