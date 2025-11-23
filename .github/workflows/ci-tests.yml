@@ -31,17 +31,17 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: maven-cache-${{ runner.os }}
-          restore-keys: maven-cache-
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: maven-${{ runner.os }}-
 
       - name: run test
+        id: run_test
         run: ./mvnw test
         continue-on-error: true
       - name: Result
         id: result
         run: |
-          result=$?
-          if [ $result -eq 0 ]; then
+          if [ "${{ steps.run_test.outcome }}" = "success" ]; then
             echo "test_passed=true" >> $GITHUB_OUTPUT
           else
             echo "test_passed=false" >> $GITHUB_OUTPUT
