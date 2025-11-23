@@ -16,8 +16,8 @@ jobs:
 
       - name: Deploy to K8s
         run: |
-          kubectl apply -f ~/devops-projects/CI-CD-Pipeline-Practice/backend/spring-petclinic/k8s/deployment.yaml
-          kubectl apply -f ~/devops-projects/CI-CD-Pipeline-Practice/backend/spring-petclinic/k8s/service.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
 
       - name: Verify pods
         run: kubectl get pods -o wide
