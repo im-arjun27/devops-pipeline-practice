@@ -1,7 +1,7 @@
 name: CD pipeline to Deploy in K8s
 on:
   workflow_run:
-    workflows: ["Main Pipeline"]
+    workflows: ["MAIN PIPELINE"]
     types:
       - completed
 
@@ -16,8 +16,8 @@ jobs:
 
       - name: Deploy to K8s
         run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
+          kubectl apply -f k8s/deployment.yml
+          kubectl apply -f k8s/service.yml
 
       - name: Verify pods
         run: kubectl get pods -o wide
