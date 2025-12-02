@@ -36,6 +36,7 @@ jobs:
 
       - name: run test
         id: run_test
+        working-directory: backend
         run: ./mvnw test
         continue-on-error: true
       - name: Result
